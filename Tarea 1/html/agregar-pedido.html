@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Pedido</title>
+    <link rel="stylesheet" type="text/css" href="../css/form.css">
+</head>
+<body>
+    <div id="formulario-div" class="container" style="display: block;">
+        <form class="formulario" id="agregar-pedido">
+            <div id="region-input" class="agregar-pedido-input">
+                <label for="region">Región</label>
+                <select id="region" name="region">
+                    <option value="">-- Seleccione una opción --</option>
+                </select>
+            </div>
+            <div id="comuna-input" class="agregar-pedido-input">
+                <label for="comuna">Comuna</label>
+                <select id="comuna" name="comuna">
+                    <option value="">-- Seleccione una opción --</option>
+                </select>
+            </div>
+            <div id="tipo-pedido-input" class="agregar-pedido-input">
+                <label for="tipo">Tipo Donación</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="">-- Seleccione una opción --</option>
+                    <option value="fruta">Fruta</option>
+                    <option value="verdura">Verdura</option>
+                    <option value="otros">Otros</option>
+                </select>
+            </div>
+            <div id="descripcion-input" class="agregar-pedido-input">
+                <label for="descripcion">Descripción</label>
+                <input id="descripcion" name="descripcion" type="text" size="80" required>
+            </div>
+            <div id="cantidad-input" class="agregar-pedido-input">
+                <label for="cantidad">Cantidad</label>
+                <input id="cantidad" name="cantidad" type="text" size="10" required>
+            </div>
+            <div id="nombre-input" class="agregar-pedido-input">
+                <label for="nombre">Nombre Donante</label>
+                <input id="nombre" name="nombre" type="text" size="80" required>
+            </div>
+            <div id="email-input" class="agregar-pedido-input">
+                <label for="email">Email Contacto</label>
+                <input id="email" name="email" type="email" size="30" required>
+            </div>
+            <div id="celular-input" class="agregar-pedido-input">
+                <label for="celular">Número de Celular</label>
+                <input id="celular" name="celular" type="text" required>
+            </div>
+            <div class="button">
+                <button type="button" id="envio-pedido">Agregar Pedido</button>
+            </div>
+        </form>
+    </div>
+    <div id="mensaje-confirmacion" class="container" style="display: none;">
+        <p>¿Confirma que desea agregar este pedido?</p>
+        <button id="confimar-formulario" type="button">Sí, confirmo</button>
+        <button id="anular-formulario" type="button">No, quiero volver al formulario</button>
+    </div>
+    <div id="mensaje-recibido" class="container" style="display: none;">
+        <p>Hemos recibido la información de su pedido</p>
+        <a href="inicio.html">Regresar al inicio</a>
+    </div>
+    <script src="../js/validacion_agregar_pedido.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información Donación</title>
+    <link rel="stylesheet" href="../css/imagen.css">
+    <link rel="stylesheet" type="text/css" href="../css/table.css">
+</head>
+<body>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Region</th>
+                    <th>Comuna</th>
+                    <th>Calle y Número</th>
+                    <th>Tipo</th>
+                    <th>Cantidad</th>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
+                    <th>Condiciones</th>
+                    <th>Foto</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Celular</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>Región Metropolitana</td>
+                <td>Providencia</td>
+                <td>Calle</td>
+                <td>Fruta</td>
+                <td>15</td>
+                <td>2023-07-13</td>
+                <td>Descripción 1</td>
+                <td>Condicion 1</td>
+                <td>
+                    <img id="imagenPequena1" src="../fotos/foto.jpg" onclick="agrandarFoto('1')" class="imagenPequena" alt="Imagen">
+                    <img id="imagenGrande1" src="../fotos/foto.jpg" onclick="this.style.display='none'" class="imagenGrande" alt="Imagen">
+                </td>
+                <td>Javier</td>
+                <td>email@ejemplo.com</td>
+                <td>+56912345678</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <a href="ver-donaciones.html">Ir a donaciones</a>
+    </div>
+    <div>
+        <script src="../js/informacion_donacion.js"></script>
+    </div>
+</body>
+</html>

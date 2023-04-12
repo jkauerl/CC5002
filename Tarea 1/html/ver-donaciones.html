@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donaciones</title>
+    <link rel="stylesheet" type="text/css" href="../css/table.css">
+</head>
+<body>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr onclick="cambiarPagina()">
+                    <th>Comuna</th>
+                    <th>Tipo</th>
+                    <th>Cantidad</th>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Foto</th>
+                </tr>
+            </thead>
+            <tr onclick="cambiarPagina()">
+                <td>Providencia</td>
+                <td>Fruta</td>
+                <td>15</td>
+                <td>2023-07-13</td>
+                <td>Javier</td>
+                <td>
+                    <img src="../fotos/foto.jpg" width="120" height="120" onclick="enlargePhoto('../fotos/foto.jpg')" alt="Imagen">
+                </td>
+            </tr>
+            <tr onclick="cambiarPagina()">
+                <td>Providencia</td>
+                <td>Verdura</td>
+                <td>10</td>
+                <td>2023-07-13</td>
+                <td>Javier</td>
+                <td>
+                    <img src="../fotos/verdura.jpeg" width="120" height="120" onclick="enlargePhoto('../fotos/foto.jpg')" alt="Imagen">
+                </td>
+            </tr>
+            <tr onclick="cambiarPagina()">
+                <td>Providencia</td>
+                <td>Otros</td>
+                <td>15</td>
+                <td>2023-07-13</td>
+                <td>Javier</td>
+                <td>
+                    <img src="../fotos/foto.jpg" width="120" height="120" onclick="enlargePhoto('../fotos/foto.jpg')" alt="Imagen">
+                </td>
+            </tr>
+            <tr onclick="cambiarPagina()">
+                <td>Providencia</td>
+                <td>Fruta</td>
+                <td>15</td>
+                <td>2023-07-14</td>
+                <td>Javier</td>
+                <td>
+                    <img src="../fotos/foto.jpg" width="120" height="120" onclick="enlargePhoto('../fotos/foto.jpg')" alt="Imagen">
+                </td>
+            </tr>
+            <tr onclick="cambiarPagina()">
+                <td>Providencia</td>
+                <td>Verdura</td>
+                <td>15</td>
+                <td>2023-07-14</td>
+                <td>Javier</td>
+                <td>
+                    <img src="../fotos/verdura.jpeg" width="120" height="120" onclick="enlargePhoto('../fotos/foto.jpg')" alt="Imagen">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <a href="inicio.html">Ir a inicio</a>
+    </div>
+    <div>
+        <script src="../js/ver_donacion.js"></script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+Para poder abrir los archivos html y ver la conexión entre ellos, se tiene que abrir el archivo incio.html en un navegador web como Google Chrome
