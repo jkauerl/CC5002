@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información Donación</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/imagen.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/informacion.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <div class="list-container">
+            <ul>
+                <li>
+                    <h1>Información Donación</h1>
+                </li>
+                <li><strong>Region:</strong> {{ donacion.region }}</li>
+                <li><strong>Comuna:</strong> {{ donacion.comuna }}</li>
+                <li><strong>Calle y Número:</strong> {{ donacion.calle }}</li>
+                <li><strong>Tipo:</strong> {{ donacion.tipo }}</li>
+                <li><strong>Cantidad:</strong> {{ donacion.cantidad }}</li>
+                <li><strong>Fecha:</strong> {{ donacion.fecha }}</li>
+                <li><strong>Descripción:</strong> {{ donacion.descripcion }}</li>
+                <li><strong>Condiciones:</strong> {{ donacion.condicion }}</li>
+                {% for foto in donacion.foto %}
+                <li>
+                    <strong>Foto:</strong>
+                    <img id="imagenPequena1" src="{{ foto }}" onclick="agrandarFoto('1')" class="imagenPequena" alt="Imagen">
+                    <img id="imagenGrande1" src="{{ foto }}" onclick="this.style.display='none'" class="imagenGrande" alt="Imagen">
+                </li>
+                {% endfor %}
+                <li><strong>Nombre:</strong> {{ donacion.nombre }}</li>
+                <li><strong>Email:</strong> {{ donacion.email }}</li>
+                <li><strong>Celular:</strong> {{ donacion.celular }}</li>
+            </ul>
+        </div>
+        <div>
+            <a href="{{ url_for('ver_donaciones') }}">Ir a donaciones</a>
+        </div>
+    </div>
+    <div>
+        <script src="{{ url_for('static', filename='/js/informacion_donacion.js') }}"></script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+.imagenPequena {
+  width: 640px;
+  height: 480px;
+}
+
+.imagenGrande {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 1280px;
+  height: 1024px;
+}
+
+.imagenVer {
+  width: 120px;
+  height: 120px;
+}

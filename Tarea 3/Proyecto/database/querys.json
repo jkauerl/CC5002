@@ -1,0 +1,17 @@
+{
+    "insertar_donacion": "INSERT INTO donacion (comuna_id, calle_numero, tipo, cantidad, fecha_disponibilidad, descripcion, condiciones_retirar, nombre, email, celular) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);",
+    "5_1_donaciones": "SELECT id, comuna_id, calle_numero, tipo, cantidad, fecha_disponibilidad, descripcion, condiciones_retirar, nombre, email, celular FROM donacion",
+    "5_donaciones": "SELECT id, comuna_id, calle_numero, tipo, cantidad, fecha_disponibilidad, descripcion, condiciones_retirar, nombre, email, celular FROM donacion ORDER BY id DESC LIMIT 5",  
+    "info_donacion": "SELECT id, comuna_id, calle_numero, tipo, cantidad, fecha_disponibilidad, descripcion, condiciones_retirar, nombre, email, celular FROM donacion WHERE id=%s",
+    "donaciones_por_tipo" : "SELECT tipo, count(tipo) FROM donacion GROUP BY tipo;",
+
+    "insertar_pedido": "INSERT INTO pedido (comuna_id, tipo, descripcion, cantidad, nombre_solicitante, email_solicitante, celular_solicitante) VALUES (%s, %s, %s, %s, %s, %s, %s);",
+    "5_1_pedidos": "SELECT id, comuna_id, tipo, descripcion, cantidad, nombre_solicitante, email_solicitante, celular_solicitante FROM pedido",
+    "5_pedidos": "SELECT id, comuna_id, tipo, descripcion, cantidad, nombre_solicitante, email_solicitante, celular_solicitante FROM pedido ORDER BY id DESC LIMIT 5",
+    "info_pedido": "SELECT id, comuna_id, tipo, descripcion, cantidad, nombre_solicitante, email_solicitante, celular_solicitante FROM pedido WHERE id=%s",
+    "pedidos_por_tipo" : "SELECT tipo, count(tipo) FROM pedido GROUP BY tipo;",
+
+    "insertar_foto": "INSERT INTO foto (ruta_archivo, nombre_archivo, donacion_id) VALUES (%s, %s, %s);",
+    "obtener_foto": "SELECT id, ruta_archivo, nombre_archivo, donacion_id FROM foto WHERE donacion_id=%s",
+    "informacion_id": "SELECT id, ruta_archivo, nombre_archivo, donacion_id FROM foto WHERE id=%s"
+}
