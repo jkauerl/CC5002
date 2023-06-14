@@ -51,7 +51,11 @@ CREATE TABLE IF NOT EXISTS `tarea2`.`donacion` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `comuna_id` INT NOT NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
   `calle_numero` VARCHAR(80) NOT NULL,
+=======
+  `calle_numero` VARCHAR(80) NULL,
+>>>>>>> 80e4bf06233d8c2dc95054286fc64f87f749e248
 =======
   `calle_numero` VARCHAR(80) NULL,
 >>>>>>> 80e4bf06233d8c2dc95054286fc64f87f749e248
@@ -99,7 +103,11 @@ CREATE TABLE IF NOT EXISTS `tarea2`.`pedido` (
   `comuna_id` INT NOT NULL,
   `tipo` ENUM('fruta', 'verdura', 'otro') NOT NULL,
 <<<<<<< HEAD
+<<<<<<< HEAD
   `descripcion` VARCHAR(80) NOT NULL,
+=======
+  `descripcion` VARCHAR(80) NULL,
+>>>>>>> 80e4bf06233d8c2dc95054286fc64f87f749e248
 =======
   `descripcion` VARCHAR(80) NULL,
 >>>>>>> 80e4bf06233d8c2dc95054286fc64f87f749e248
