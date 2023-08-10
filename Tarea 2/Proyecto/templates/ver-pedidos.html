@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/table.css') }}">
+</head>
+<body>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Comuna</th>
+                    <th>Tipo</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Nombre Solicitante</th>
+                </tr>
+            </thead>
+            {% if pedidos_pagina %}
+            {% for pedido in pedidos_pagina %}
+            <tr onclick="cambiarPaginaPedido('{{ pedido.id }}')">
+                <td>{{ pedido.comuna }}</td>
+                <td>{{ pedido.tipo }}</td>
+                <td>{{ pedido.descripcion }}</td>
+                <td>{{ pedido.cantidad }}</td>
+                <td>{{ pedido.nombre }}</td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="6">No hay pedidos disponibles</td>
+            </tr>
+            {% endif %}
+            {% if hay_siguiente or hay_anterior %}
+            <tr>
+                <td colspan="6">
+                    <div class="pagination">
+                        {% if hay_anterior %}
+                            <a href="{{ url_for('ver_donaciones', inicio=inicio - 5) }}">Anterior</a>
+                        {% endif %}
+                        {% if hay_siguiente %}
+                            <a href="{{ url_for('ver_donaciones', inicio=inicio + 5) }}">Siguiente</a>
+                        {% endif %}                    
+                    </div>
+                </td>
+            </tr>
+            {% endif %}
+        </table>
+    </div>
+    <div class="container">
+        <a href="{{ url_for('inicio') }}">Ir a inicio</a>
+    </div>
+    <script src="{{ url_for('static', filename='js/informacion.js') }}"></script>
+</body>
+</html>

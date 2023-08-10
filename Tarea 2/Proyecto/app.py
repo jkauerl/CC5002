@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, url_for, request, send_from_directory, jsonify
+from flask import Flask, redirect, render_template, url_for, request, send_from_directory
 from validaciones import *
 from database import db
 import hashlib
@@ -9,107 +9,16 @@ import json
 UPLOAD_FOLDER = 'static/uploads'
 
 
-with open('static/region_comuna.json', 'r', encoding='utf-8') as region_comuna:
+with open('static/region_comuna.json', 'r') as region_comuna:
 	COMUNA_DICT = json.load(region_comuna)
-        
-with open('static/comunas-Chile.json', 'r', encoding='utf-8') as region_comuna:
-	COMUNA_LAT_LONG_DICT = json.load(region_comuna)
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.json.sort_keys = False
 # Rutas de la applicacion
 
 @app.route("/") 
 def inicio():
     return render_template('inicio.html')
-
-@app.route("/get-markers")
-def get_markers():
-    lista_donaciones = []
-    for donacion in db.lista_donaciones_inicio():
-        id_donacion, comuna_id, calle_numero, tipo, cantidad, fecha, _, _, _, email, _ = donacion
-
-        comuna_nombre = None 
-        for region in COMUNA_DICT['regiones']:
-            comunas_nombres = region['comunas']
-            for c in comunas_nombres:
-                if c['id'] == comuna_id:
-                    comuna_nombre = c['nombre']
-                    break
-            if comuna_nombre:
-                break 
-
-        longitud = None
-        latitud = None
-
-        for comuna in COMUNA_LAT_LONG_DICT:
-            if comuna["name"] == comuna_nombre:
-                longitud = comuna["lng"]
-                latitud = comuna["lat"]
-                break
-
-        lista_donaciones.append({
-            "id": id_donacion,
-            "comuna": comuna_nombre,
-            "calle_y_numero": calle_numero,
-            "tipo": tipo,
-            "cantidad": cantidad,
-            "fecha_disponibilidad": fecha.strftime("%Y-%m-%d"),
-            "email": email,
-            "latitud": float(latitud),
-            "longitud": float(longitud)
-        }) 
-
-    lista_pedidos = []
-    for pedido in db.lista_pedidos_inicio():
-        id, comuna_id, tipo, _, cantidad, _, email_solicitante, _ = pedido
-
-        comuna_nombre = None
-        for region in COMUNA_DICT['regiones']:
-            comunas_nombres = region['comunas']
-            for c in comunas_nombres:
-                if c['id'] == comuna_id:
-                    comuna_nombre = c['nombre']
-                    break
-            if comuna_nombre:
-                break
-
-        longitud = None
-        latitud = None
-
-        for comuna in COMUNA_LAT_LONG_DICT:
-            if comuna["name"] == comuna_nombre:
-                longitud = comuna["lng"]
-                latitud = comuna["lat"]
-                break
-
-        lista_pedidos.append({
-            "id": id,
-            "comuna": comuna_nombre,
-            "tipo": tipo, 
-            "cantidad": cantidad,
-            "email": email_solicitante,
-            "latitud": float(latitud),
-            "longitud": float(longitud)
-        })
-
-    repeticiones = []
-    for i in range(len(lista_donaciones)):
-        for j in range(i+1, len(lista_donaciones)):
-            if(lista_donaciones[i]["comuna"]==lista_donaciones[j]["comuna"]):
-                repeticiones.append(lista_donaciones[i]["comuna"])
-        for k in range(len(lista_pedidos)):
-            for p in range(k+1, len(lista_pedidos)):
-                if(lista_pedidos[k]["comuna"]==lista_pedidos[p]["comuna"]):
-                    repeticiones.append(lista_pedidos[k]["comuna"])
-            if(lista_donaciones[i]["comuna"] == lista_pedidos[k]["comuna"]):
-                repeticiones.append(lista_donaciones[i]["comuna"])
-    data = []
-    data.append(lista_donaciones)
-    data.append(lista_pedidos)
-    data.append(repeticiones)
-    return jsonify(data)
 
 @app.route("/agregar-donacion", methods=('POST', 'GET'))
 def agregar_donacion():
@@ -130,9 +39,9 @@ def agregar_donacion():
         email = request.form['email']
         celular = request.form['celular']
 
-        if not (validador_select(region_id)):
+        if not (validador_select(region_id) and hay_region_en_comuna(region_id, comuna_id, COMUNA_DICT)):
             error+=1
-        if not (validador_select(comuna_id)):
+        if not (validador_select(comuna_id) and hay_comuna_en_region(comuna_id, region_id, COMUNA_DICT)):
             error+=1
         if not validador_largo_max(calle_y_numero, 80):
             error+=1
@@ -233,7 +142,7 @@ def ver_donaciones(inicio=0):
         id_donacion, comuna_id, calle_numero, tipo, cantidad, fecha, descripcion, condiciones_retirar, nombre, email, celular = donacion
         fotos = []
         for foto in db.obtener_fotos(id_donacion):
-            _, _, nombre_archivo, _ = foto
+            id_foto, ruta_archivo, nombre_archivo, donacion_id = foto
             nombre_archivo = f"uploads/{nombre_archivo}"
             url = url_for('static', filename=nombre_archivo)
             fotos.append(url)
@@ -277,7 +186,7 @@ def ver_pedidos(inicio=0):
 
     pedidos = []
     for pedido in db.lista_pedidos():
-        id, comuna_id, tipo, descripcion, cantidad, nombre, _, _ = pedido
+        id, comuna_id, tipo, descripcion, cantidad, nombre, email_solicitante, celular_solicitante = pedido
 
         comuna = None
         for region in COMUNA_DICT['regiones']:
@@ -295,7 +204,7 @@ def ver_pedidos(inicio=0):
             "descripcion": descripcion,
             "tipo": tipo, 
             "cantidad": cantidad,
-            "nombre": nombre      
+            "nombre": nombre,      
         })
 
     fin = inicio + 5
@@ -311,6 +220,7 @@ def ver_pedidos(inicio=0):
     return render_template('ver-pedidos.html', pedidos_pagina=pedidos_pagina, inicio=inicio, hay_siguiente=hay_siguiente, hay_anterior=hay_anterior)
 
 
+
 @app.route("/informacion-donacion/<id>")
 def informacion_donacion(id):
     
@@ -319,7 +229,7 @@ def informacion_donacion(id):
 
     fotos = []
     for foto in db.obtener_fotos(id):
-        _, _, nombre_archivo, _ = foto
+        id_foto, ruta_archivo, nombre_archivo, donacion_id = foto
         nombre_archivo = f"uploads/{nombre_archivo}"
         url = url_for('static', filename=nombre_archivo)
         fotos.append(url) 
@@ -386,33 +296,6 @@ def informacion_pedido(id):
     }
 
     return render_template("informacion-pedido.html", pedido=pedido)
-
-@app.route("/grafico")
-def graficos():
-    return render_template("graficos.html")
-
-@app.route("/get-total", methods=["GET"])
-def get_total():
-    
-    data = []
-    donaciones = []
-    for donacion in db.donaciones_tipo():
-        tipo, cantidad = donacion
-        donaciones.append({
-            "tipo": tipo.capitalize(),
-            "y": cantidad
-        })
-    data.append(donaciones)
-
-    pedidos = []
-    for donacion in db.pedidos_tipo():
-        tipo, cantidad = donacion
-        pedidos.append({
-            "tipo": tipo.capitalize(),
-            "y": cantidad
-        })
-    data.append(pedidos)
-    return jsonify(data)
 
 if __name__ == "__main__":
     app.run(debug=True)

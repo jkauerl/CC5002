@@ -1,0 +1,32 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.list-container {
+    width: 600px; /* Adjust the width as needed */
+    background-color: #9dbbab; /* Replace with the desired background color */
+    padding: 20px; /* Adjust the padding as needed */
+    border-radius: 5px; /* Add border radius if desired */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 10px; /* Adjust the spacing between list items */
+}
+
+strong {
+    margin-right: 5px; /* Adjust the spacing between label and value */
+}
+
+.pedido-lin{
+    justify-content: center;
+}

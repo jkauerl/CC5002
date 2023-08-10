@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Donación</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/form.css') }}">
+</head>
+<body>
+    <div id="formulario-div" class="container" style="display: block;">
+        <form class="formulario" id="agregar-donacion" method="POST" enctype="multipart/form-data">
+            <div id="region-input">
+                <label for="region">Región</label>
+                <select id="region" name="region">
+                    <option value="">-- Seleccione una opción --</option>
+                </select>
+            </div>
+            <div id="comuna-input">
+                <label for="comuna">Comuna</label>
+                <select id="comuna" name="comuna">
+                    <option value="">-- Seleccione una opción --</option>
+                </select>
+            </div>
+            <div id="calle-y-numero-input">
+                <label for="calle-numero">Calle y Número</label>
+                <input id="calle-numero" name="calle-numero" type="text" size="80" required>
+            </div>
+            <div id="tipo-donacion-input">
+                <label for="tipo">Tipo Donación</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="">-- Seleccione una opción --</option>
+                    <option value="fruta">Fruta</option>
+                    <option value="verdura">Verdura</option>
+                    <option value="otros">Otros</option>
+                </select>
+            </div>
+            <div id="cantidad-input">
+                <label for="cantidad">Cantidad</label>
+                <input id="cantidad" name="cantidad" type="text" size="10" required>
+            </div>
+            <div id="fecha-disponibilidad-input">
+                <label for="fecha-disponibilidad">Fecha Disponibilidad (yyyy-mm-dd)</label>
+                <input id="fecha-disponibilidad" name="fecha-disponibilidad" type="text" size="10" required>
+            </div>
+            <div id="descripcion-input">
+                <label for="descripcion">Descripción</label>
+                <input id="descripcion" name="descripcion" type="text" size="80" required>
+            </div>
+            <div id="condiciones-input">
+                <label for="condiciones">Condiciones para Retirar</label>
+                <input id="condiciones" name="condiciones" type="text" size="80" required>
+            </div>
+            <div id="foto-1-input">
+                <label for="foto-1">Foto Donacion 1</label>
+                <input id="foto-1" name="foto-1" type="file">            
+            </div>
+            <div id="foto-2-input">
+                <label for="foto-2">Foto Donacion 2</label>
+                <input id="foto-2" name="foto-2" type="file">            
+            </div>
+            <div id="foto-3-input">
+                <label for="foto-3">Foto Donacion 3</label>
+                <input id="foto-3" name="foto-3" type="file">            
+            </div>
+            <div id="nombre-input">
+                <label for="nombre">Nombre Donante</label>
+                <input id="nombre" name="nombre" type="text" size="80" required>
+            </div>
+            <div id="email-input">
+                <label for="email">Email Contacto</label>
+                <input id="email" name="email" type="email" size="30" required>
+            </div>
+            <div id="celular-input">
+                <label for="celular">Número de Celular</label>
+                <input id="celular" name="celular" type="text" required>
+            </div>
+            <div class="button">
+                <button type="button" id="envio-donacion">Agregar Donación</button>
+            </div>
+            <div id="mensaje-confirmacion" class="container" style="display: none;">
+                <p>¿Confirma que desea agregar esta donación?</p>
+                <button id="confimar-formulario" type="button">Sí, confirmo</button>
+                <button id="anular-formulario" type="button">No, quiero volver al formulario</button>
+            </div>
+            <div id="mensaje-recibido" class="container" style="display: none;">
+                <p>Hemos recibido la información de su donación</p>
+                <input type="submit" id="mensaje-devuelta" value="Regresar al inicio">
+            </div>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/validacion_agregar_donacion.js') }}"></script>
+</body>
+</html>

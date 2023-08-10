@@ -1,0 +1,27 @@
+.table {
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+thead tr {
+    background-color: #988c8c;
+    font-weight: bold;
+}
+  
+th, td {
+    border: 1px solid #000;
+    padding: 8px;
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+a {
+    justify-content: center;
+    display: flex;
+}

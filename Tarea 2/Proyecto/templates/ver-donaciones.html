@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donaciones</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/imagen.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/table.css') }}">
+</head>
+<body>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Comuna</th>
+                    <th>Tipo</th>
+                    <th>Cantidad</th>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Foto</th>
+                </tr>
+            </thead>
+            {% if donaciones_pagina %}
+            {% for donacion in donaciones_pagina %}
+            <tr onclick="cambiarPaginaDonacion('{{ donacion.id }}')">
+                <td>{{ donacion.comuna }}</td>
+                <td>{{ donacion.tipo }}</td>
+                <td>{{ donacion.cantidad }}</td>
+                <td>{{ donacion.fecha_disponibilidad }}</td>
+                <td>{{ donacion.nombre }}</td>
+                <td>
+                    {% for foto in donacion.url %}
+                    <div class="container">
+                        <img src="{{ foto }}" alt="Imagen" class="imagenVer">
+                    </div>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="6">No hay donaciones disponibles</td>
+            </tr>
+            {% endif %}
+            
+            {% if hay_siguiente or hay_anterior %}
+            <tr>
+                <td colspan="6">
+                    <div class="pagination">
+                        {% if hay_anterior %}
+                            <a href="{{ url_for('ver_donaciones', inicio=inicio - 5) }}">Anterior</a>
+                        {% endif %}
+                        {% if hay_siguiente %}
+                            <a href="{{ url_for('ver_donaciones', inicio=inicio + 5) }}">Siguiente</a>
+                        {% endif %}                    
+                    </div>
+                </td>
+            </tr>
+            {% endif %}
+        </table>
+    </div>
+    <div>
+        <button onclick="ver_donaciones" ></button>
+    </div>
+    <div class="container">
+        <a href="{{ url_for('inicio') }}">Ir a inicio</a>
+    </div>
+    <div>
+        <script src="{{ url_for('static', filename='js/informacion.js') }}"></script>
+    </div>
+</body>
+</html>
